@@ -20,6 +20,7 @@ let selectedRibbon = null;
 let finalRibbon = null;
 
 let backgroundMusic;
+let paperSound;
 
 
 function preload() {
@@ -40,6 +41,8 @@ function preload() {
   plainBouquet = loadImage("finaldata/plainBouquet.png");
 
   backgroundMusic = loadSound("finaldata/totoro_lofi.mp3");
+
+  paperSound = loadSound("finaldata/paper_sound.mp3");
 
   flowers.push({ img: blueFlower, x: 100, y: 20, w: 50, h: 150, gen: true});
   flowers.push({ img: redTulip, x: 200, y: 20, w: 50, h: 150, gen: true });
@@ -166,6 +169,8 @@ function mousePressed() {
   if (mouseX > 50 && mouseX < 100 && mouseY > 250 && mouseY < 300) {
     // Show plainBouquet when wrappingIcon is clicked
     showPlainBouquet = !showPlainBouquet;
+    paperSound.play();
+    paperSound.setVolume(0.2);
   }
     // Show showRibbons when ribbonIcon is clicked
   if (mouseX > 50 && mouseX < 100 && mouseY > 450 && mouseY < 500) {
