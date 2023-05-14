@@ -19,6 +19,9 @@ let showRibbons = false;
 let selectedRibbon = null;
 let finalRibbon = null;
 
+let backgroundMusic;
+
+
 function preload() {
   wrappingIcon = loadImage("finaldata/wrappingicon.png");
   ribbonIcon = loadImage("finaldata/ribbonIcon.png");
@@ -36,6 +39,8 @@ function preload() {
 
   plainBouquet = loadImage("finaldata/plainBouquet.png");
 
+  backgroundMusic = loadSound("finaldata/totoro_lofi.mp3");
+
   flowers.push({ img: blueFlower, x: 100, y: 20, w: 50, h: 150, gen: true});
   flowers.push({ img: redTulip, x: 200, y: 20, w: 50, h: 150, gen: true });
   flowers.push({ img: chrysanthemum, x: 300, y: 20, w: 50, h: 150, gen: true });
@@ -49,6 +54,8 @@ function preload() {
 
 function setup() {
   createCanvas(1000, 1000);
+  backgroundMusic.loop();
+  backgroundMusic.setVolume(0.2);
 }
 
 function draw() {
@@ -202,3 +209,5 @@ function mouseDragged() {
     selectedRibbon.y = mouseY - offsetY;
   }
 }
+
+// I used prettier to reformat my code
