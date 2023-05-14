@@ -73,6 +73,30 @@ function draw() {
   image(ribbonIcon, 50, 450, 50, 50);
   image(flowerIcon, 50, 650, 50, 50);
 
+  let a = 'First, click the wrapping paper icon';
+    fill(50);
+    text(a, 100, 850, 150, 80); // p5 reference
+
+
+  let b = 'Then, click the ribbon icon. Drag a ribbon of choice to the handle of the bouquet';
+    fill(50);
+    text(b, 300, 850, 150, 80); 
+
+
+  let c = 'Lastly, click the flower icon. Drag your selected flowers into the bouquet';
+    fill(50);
+    text(c, 500, 850, 150, 80); 
+
+
+  let d = 'Finished! Enjoy your bouquet';
+    fill(50);
+    text(d, 700, 850, 150, 80); 
+
+   let e = ':)';
+    fill(50);
+    text(e, 900, 850, 150, 80); 
+
+
   if (showFlowers) {
     for (let i = 0; i < flowers.length; i++) {
       let flower = flowers[i];
