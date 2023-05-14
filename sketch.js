@@ -7,6 +7,8 @@ let wrappingIcon;
 let blueRibbon;
 let ribbonIcon;
 let flowerIcon;
+let lilacFlower;
+let orangeFlower;
 
 let flowers = [];
 let showFlowers = false;
@@ -37,6 +39,8 @@ function preload() {
   redTulip = loadImage("finaldata/red_tulip.png");
   chrysanthemum = loadImage("finaldata/chrysanthemum.png");
   leafBush = loadImage("finaldata/leaf_bushel.png");
+  lilacFlower = loadImage("finaldata/lilacflower.png");
+  orangeFlower = loadImage("finaldata/orangeflower.png");
 
   plainBouquet = loadImage("finaldata/plainBouquet.png");
 
@@ -46,8 +50,10 @@ function preload() {
 
   flowers.push({ img: blueFlower, x: 100, y: 20, w: 50, h: 150, gen: true});
   flowers.push({ img: redTulip, x: 200, y: 20, w: 50, h: 150, gen: true });
-  flowers.push({ img: chrysanthemum, x: 300, y: 20, w: 50, h: 150, gen: true });
-  flowers.push({ img: leafBush, x: 400, y: 20, w: 50, h: 150, gen: true });
+  flowers.push({ img: lilacFlower, x: 300, y: 20, w: 50, h: 150, gen: true });
+  flowers.push({ img: orangeFlower, x: 400, y: 20, w: 50, h: 150, gen: true });
+  flowers.push({ img: chrysanthemum, x: 500, y: 20, w: 50, h: 150, gen: true });
+  flowers.push({ img: leafBush, x: 600, y: 20, w: 50, h: 150, gen: true });
 
   ribbons.push({ img: blueRibbon, x: 100, y: 70, w: 70, h: 70 });
   ribbons.push({ img: orangeRibbon, x: 200, y: 70, w: 70, h: 70 });
@@ -58,7 +64,7 @@ function preload() {
 function setup() {
   createCanvas(1000, 1000);
   backgroundMusic.loop();
-  backgroundMusic.setVolume(0.2);
+  backgroundMusic.setVolume(0.15);
 }
 
 function draw() {
