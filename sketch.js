@@ -309,3 +309,5 @@ function mouseDragged() {
 }
 
 // I used prettier to reformat my code
+// Reused snow from Midterm
+// Asked Jiyun and CS friends lots of general questions and how-tos, but wrote out all code on my own
