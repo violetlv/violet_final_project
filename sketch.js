@@ -25,6 +25,12 @@ let backgroundMusic;
 let paperSound;
 
 let buttonClicked = false;
+let buttonSpawned = false;
+
+let backgroundColor = [215, 204, 224]
+let snowflakes = [];
+
+
 function preload() {
   wrappingIcon = loadImage("finaldata/wrappingicon.png");
   ribbonIcon = loadImage("finaldata/ribbonIcon.png");
@@ -64,17 +70,26 @@ function preload() {
 function setup() {
   createCanvas(1000, 1000);
   backgroundMusic.loop();
-  backgroundMusic.setVolume(0.15);
+  backgroundMusic.setVolume(0.1);
+  //generate 100 Snowflake objects and put them into the array snowflakes
+  for (let i = 0; i < 100; i++) {
+    snowflakes.push(new Snowflake());
+  }
 }
 
+// logic for when button is clicked and switches to final scene
 function buttonPressed() {
+  print("button removed")
+  button.remove();
   buttonClicked = true;
+  backgroundColor = [153,186,221]
 }
 
 
 function draw() {
-  background(215, 204, 224);
+  background(backgroundColor);
   if(!buttonClicked){
+    // displays icons only when button is not clicked
     image(wrappingIcon, 50, 250, 50, 50);
     image(ribbonIcon, 50, 450, 50, 50);
     image(flowerIcon, 50, 650, 50, 50);
@@ -95,16 +110,16 @@ function draw() {
    let d = 'When finished, click "Done". Enjoy your bouquet! :)';
     fill(50);
     text(d, 700, 870, 170, 80); 
-
   }
-  
-  
-    if (showPlainBouquet && finalRibbon && !buttonClicked) {
-      button = createButton('Click me');
-      button.position(500, 200);
-      button.mousePressed(buttonPressed);
+  // display snow only after button is clicked
+  if(buttonClicked) {
+    for (let i = 0; i < snowflakes.length; i++) {
+      snowflakes[i].update();
+      snowflakes[i].display(); 
     }
+  }
 
+  // shows flowers
   if (showFlowers) {
     for (let i = 0; i < flowers.length; i++) {
       let flower = flowers[i];
@@ -116,7 +131,15 @@ function draw() {
         // No tint for other flowers
         noTint(); 
       }
-      image(flower.img, flower.x, flower.y, flower.w, flower.h);
+      if (!buttonClicked) {
+        image(flower.img, flower.x, flower.y, flower.w, flower.h);
+      }
+      else{
+        // do not show generator flowers after button is clicked
+        if (!flower.gen) {
+          image(flower.img, flower.x, flower.y, flower.w, flower.h);
+        }
+      }
     }
   }
 
@@ -142,6 +165,32 @@ function draw() {
 
 }
 
+//defining snowflake class
+class Snowflake { 
+  constructor() {
+    this.x = random(width);
+    this.y = random(-100, -10);
+    this.size = random(5, 15);
+    this.speed = random(1, 3);
+  } 
+  
+  //updates snowflake y position based on speed and resets location to somewhere on the top when out of frame
+  update() {
+    this.y += this.speed;
+    
+    if (this.y > height + this.size) {
+      this.y = random(-100, -10);
+    }
+  } 
+
+  //displays the Snowflake
+  display() {
+    noStroke();
+    fill(255, 255, 255, 200);
+    ellipse(this.x, this.y, this.size);
+  }
+}
+    
 function mousePressed() {
   // Check if mouse is over a ribbon
   if(!finalRibbon){
@@ -163,10 +212,8 @@ function mousePressed() {
       }
     }
   }
-
-
   // Check if mouse is over a flower only if not above a ribbon
-  if (!selectedRibbon) {
+  if (!selectedRibbon && !buttonClicked) {
     for (let i = 0; i < flowers.length; i++) {
       let flower = flowers[i];
       if (
@@ -239,6 +286,12 @@ function mouseReleased() {
     console.log('Final Ribbon Achieved')
   }
   selectedRibbon = null;
+  if (showPlainBouquet && finalRibbon && showFlowers && !buttonClicked && !buttonSpawned) {
+    button = createButton('Done');
+    buttonSpawned = true;
+    button.position((width/2)-40, 750);
+    button.mousePressed(buttonPressed);
+  }
 }
 
 function mouseDragged() {
