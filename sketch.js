@@ -24,7 +24,7 @@ let finalRibbon = null;
 let backgroundMusic;
 let paperSound;
 
-
+let buttonClicked = false;
 function preload() {
   wrappingIcon = loadImage("finaldata/wrappingicon.png");
   ribbonIcon = loadImage("finaldata/ribbonIcon.png");
@@ -67,35 +67,43 @@ function setup() {
   backgroundMusic.setVolume(0.15);
 }
 
+function buttonPressed() {
+  buttonClicked = true;
+}
+
+
 function draw() {
   background(215, 204, 224);
-  image(wrappingIcon, 50, 250, 50, 50);
-  image(ribbonIcon, 50, 450, 50, 50);
-  image(flowerIcon, 50, 650, 50, 50);
-
-  let a = 'First, click the wrapping paper icon';
+  if(!buttonClicked){
+    image(wrappingIcon, 50, 250, 50, 50);
+    image(ribbonIcon, 50, 450, 50, 50);
+    image(flowerIcon, 50, 650, 50, 50);
+    let a = 'First, click the wrapping paper icon';
     fill(50);
-    text(a, 100, 850, 150, 80); // p5 reference
+    text(a, 100, 870, 150, 80); // p5 reference
 
 
   let b = 'Then, click the ribbon icon. Drag a ribbon of choice to the handle of the bouquet';
     fill(50);
-    text(b, 300, 850, 150, 80); 
+    text(b, 300, 870, 150, 80); 
 
 
   let c = 'Lastly, click the flower icon. Drag your selected flowers into the bouquet';
     fill(50);
-    text(c, 500, 850, 150, 80); 
+    text(c, 500, 870, 150, 80); 
 
-
-  let d = 'Finished! Enjoy your bouquet';
+   let d = 'When finished, click "Done". Enjoy your bouquet! :)';
     fill(50);
-    text(d, 700, 850, 150, 80); 
+    text(d, 700, 870, 170, 80); 
 
-   let e = ':)';
-    fill(50);
-    text(e, 900, 850, 150, 80); 
-
+  }
+  
+  
+    if (showPlainBouquet && finalRibbon && !buttonClicked) {
+      button = createButton('Click me');
+      button.position(500, 200);
+      button.mousePressed(buttonPressed);
+    }
 
   if (showFlowers) {
     for (let i = 0; i < flowers.length; i++) {
@@ -131,6 +139,7 @@ function draw() {
   if (finalRibbon) {
     image(finalRibbon.img, finalRibbon.x, finalRibbon.y, finalRibbon.h, finalRibbon.w)
   }
+
 }
 
 function mousePressed() {
@@ -211,6 +220,7 @@ function mousePressed() {
     showFlowers = !showFlowers;
   }
 }
+
 
 function mouseReleased() {
   // Deselect the flower
